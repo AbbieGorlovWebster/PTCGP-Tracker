@@ -474,6 +474,25 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 </Text>
               </View>
 
+              {/* Artist */}
+              <View style={styles.artistContainer}>
+                <Text
+                  style={[
+                    styles.regularText,
+                    styles.NormalText,
+                    styles.LeftAlign,
+                    styles.CenterVAlign,
+                  ]}
+                >
+                  {
+                    CardAssets["Localisation"]["Illustrator"][
+                      LanguageCode as keyof (typeof CardAssets)["Localisation"]["Illustrator"]
+                    ]
+                  }{" "}
+                  {cardDetails?.Artist}
+                </Text>
+              </View>
+
             </ImageBackground>
           </ImageBackground>
         </ImageBackground>
