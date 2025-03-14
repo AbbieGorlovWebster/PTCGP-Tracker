@@ -414,16 +414,13 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
               </Text>
               <View style={styles.retreatContainer}>
                 <Text
-                  style={{
-                    height: 29,
-                    width: 118,
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    textAlignVertical: "center",
-                    fontSize: 13,
-                    fontFamily: "Puritan",
-                  }}
+                  style={[
+                    styles.regularText,
+                    styles.NormalText,
+                    styles.CenterAlign,
+                    styles.CenterVAlign,
+                    styles.retreatText,
+                  ]}
                 >
                   retreat
                 </Text>
@@ -547,15 +544,167 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
 }
 
 const styles = StyleSheet.create({
+  cardText: {
+    marginRight: 32,
+    alignSelf: "center",
+    justifyContent: "center",
+    textAlign: "left",
+    textAlignVertical: "center",
+    fontSize: 15,
+  },
+  flavorText: {
+    lineHeight: 22,
+    letterSpacing: 1,
+  },
+  retreatText: {
+    width: 127,
+  },
+  weaknessText: {
+    width: 156,
+  },
+  evoText: {
+    left: 135,
+    top: 94,
+    height: 22,
+  },
+
+  // Text Styles
+  // Font Weighting
+  regularText: {
+    fontFamily: "PuritanBold",
+    fontWeight: 400,
+  },
+  boldText: {
+    fontFamily: "PuritanBold",
+    fontWeight: 700,
+  },
+  italicText: {
+    fontFamily: "PuritanBoldItalic",
+    fontWeight: 400,
+  },
+
+  //Font Size
+  HugeText: {
+    fontSize: 48,
+  },
+  BigText: {
+    fontSize: 30,
+  },
+  LargeText: {
+    fontSize: 22,
+  },
+  NormalText: {
+    fontSize: 15,
+  },
+  SmallText: {
+    fontSize: 12,
+  },
+
+  //Text Alignment
+  //Horizontal
+  LeftAlign: {
+    textAlign: "left",
+  },
+  RightAlign: {
+    textAlign: "right",
+  },
+  CenterAlign: {
+    textAlign: "center",
+  },
+
+  //Vertical
+  TopAlign: {
+    textAlignVertical: "top",
+  },
+  BottomAlign: {
+    textAlignVertical: "bottom",
+  },
+  CenterVAlign: {
+    textAlignVertical: "center",
+  },
+
+  //View Styles
   card: {
     width: 734,
     height: 1024,
     alignSelf: "center",
   },
+  nameContainer: {
+    left: 139,
+    top: 29,
+    position: "absolute",
+    height: 61,
+  },
+  artistContainer: {
+    left: 54,
+    top: 915,
+    position: "absolute",
+  },
+  flavourTextContainer: {
+    right: 54,
+    top: 922,
+    position: "absolute",
+  },
+  weaknessContainer: {
+    flexDirection: "row",
+    left: 55,
+    top: 876,
+    position: "absolute",
+    height: 36,
+    width: 304,
+    gap: 4,
+  },
+  retreatContainer: {
+    flexDirection: "row",
+    left: 382,
+    top: 876,
+    position: "absolute",
+    height: 36,
+    width: 304,
+    gap: 7,
+  },
   cardContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+  },
+  HPContainer: {
+    right: 97,
+    top: 29,
+    position: "absolute",
+    height: 61,
+    flexDirection: "row",
+    paddingTop: 13,
+    paddingBottom: 10,
+    gap: 3,
+  },
+  descriptionContainer: {
+    left: 61,
+    top: 491,
+    position: "absolute",
+    width: 617,
+    height: 19,
+    justifyContent: "center",
+  },
+  rarityContainer: {
+    left: 58,
+    top: 935,
+    position: "absolute",
+    height: 26,
+    flexDirection: "row",
+  },
+
+  //Image Styles
+  typePip: {
+    width: 88,
+    height: 88,
+  },
+  retreatSymbol: {
+    width: 26,
+    height: 26,
+    transformOrigin: "top left",
+    top: 0,
+    alignSelf: "center",
   },
   priorEvoloution: {
     width: 80,
@@ -564,10 +713,6 @@ const styles = StyleSheet.create({
     top: 79,
     position: "absolute",
   },
-  typePip: {
-    width: 88,
-    height: 88,
-  },
   typeSymbol: {
     height: 44,
     width: 44,
@@ -575,20 +720,18 @@ const styles = StyleSheet.create({
     left: 649,
     position: "absolute",
   },
-  retreatSymbol: {
-    width: 29,
-    height: 29,
-    transformOrigin: "left top",
-    top: 0,
+  raritySymbol: {
+    height: 26,
+    width: 26,
+    contentFit: "contain",
+    marginTop: 0.2,
   },
-  retreatContainer: {
-    flexDirection: "row",
-    left: 388,
-    top: 880,
+  cardArt: {
+    right: 56,
+    top: 97,
     position: "absolute",
-    height: 30,
-    width: 295,
-    gap: 7,
+    width: 616,
+    height: 384,
   },
 });
 
