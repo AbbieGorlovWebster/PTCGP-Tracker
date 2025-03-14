@@ -459,6 +459,21 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 {WeaknessDisplay}
               </View>
 
+              {/* Flavour Text */}
+              <View style={styles.flavourTextContainer}>
+                <Text
+                  style={[
+                    styles.NormalText,
+                    styles.CenterVAlign,
+                    styles.RightAlign,
+                    styles.regularText,
+                    styles.flavorText,
+                  ]}
+                >
+                  {cardDetails?.FlavorText}
+                </Text>
+              </View>
+
             </ImageBackground>
           </ImageBackground>
         </ImageBackground>
