@@ -34,6 +34,10 @@ type Ability = {
   AbilitySpecifics: any[];
 };
 
+type Move = {
+  Name: string;
+  Cost: string[];
+  Damage: number;
 };
 
 type Props = {
