@@ -28,6 +28,12 @@ type Card = {
   HP: number;
 };
 
+type Ability = {
+  AbilityName: string;
+  AbilityText: string;
+  AbilitySpecifics: any[];
+};
+
 };
 
 type Props = {
