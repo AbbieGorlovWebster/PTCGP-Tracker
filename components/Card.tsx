@@ -6,6 +6,8 @@ import {
 } from "expo-sqlite";
 import { useEffect, useState } from "react";
 import { Image, type ImageSource } from "expo-image";
+import CardAssets from "../components/CardAssets";
+import * as DBHandler from "../components/DBHandler";
 
 type Card = {
   ID: number;
