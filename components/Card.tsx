@@ -264,6 +264,51 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
     );
   }
 
+  //Rarity
+  const RarityDisplay = [];
+
+  if (cardDetails?.Rarity) {
+    switch (cardDetails.Rarity) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+        for (let i = 0; i < cardDetails.Rarity; i++) {
+          RarityDisplay.push(
+            <Image
+              style={styles.raritySymbol}
+              source={CardAssets["Rarity"]["Diamond"]}
+            />
+          );
+        }
+        break;
+
+      case 5:
+      case 6:
+      case 7:
+        for (let i = 4; i < cardDetails.Rarity; i++) {
+          RarityDisplay.push(
+            <Image
+              style={styles.raritySymbol}
+              source={CardAssets["Rarity"]["Star"]}
+            />
+          );
+        }
+        break;
+
+      case 8:
+        RarityDisplay.push(
+          <Image
+            style={styles.raritySymbol}
+            source={CardAssets["Rarity"]["Crown"]}
+          />
+        );
+        break;
+    }
+  }
+
+  console.log(RarityDisplay);
+
   return (
     <View style={{ transform: [{ scale: ScaleFactor }] }}>
       <ImageBackground /*Type Colour Background*/
