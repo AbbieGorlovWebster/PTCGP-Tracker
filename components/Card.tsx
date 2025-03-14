@@ -220,10 +220,10 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
     getCardData();
   }, [CardID]);
 
+  //Retreat Cost
   const RetreatDisplay = [];
 
   if (cardDetails) {
-    console.log(cardDetails.RetreatCost);
     for (let i = 0; i < cardDetails.RetreatCost; i++) {
       RetreatDisplay.push(
         <Image
