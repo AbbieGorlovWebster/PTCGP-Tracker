@@ -321,6 +321,18 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
             : null
         }
       >
+        {/* Card Art */}
+        <Image
+          style={styles.cardArt}
+          source={
+            cardDetails?.DisplayID
+              ? CardAssets["CardArt"][
+                  cardDetails?.DisplayID as keyof (typeof CardAssets)["CardArt"]
+                ]
+              : null
+          }
+        />
+
         <ImageBackground /*Frame*/
           style={styles.card}
           source={
