@@ -73,27 +73,151 @@ export default function CardViewer({
 }
 
 export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
-  const db = useSQLiteContext();
+  const database = useSQLiteContext();
   const [cardDetails, setCardDetails] = useState<Card>();
 
   useEffect(() => {
-    async function dbRequest() {
-      const cardStatement = await db.prepareAsync(
-        "SELECT * FROM Cards WHERE ID=$ID"
-      );
-      try {
-        let cardRequest = await cardStatement.executeAsync({
-          $ID: CardID,
-        });
+    let requestCardDetails: Card;
 
-        const cardResponse = (await cardRequest.getFirstAsync()) as Card;
-        setCardDetails(cardResponse);
-      } finally {
-        await cardStatement.finalizeAsync();
-      }
+    async function getCardData() {
+      //Get Raw Card Data From DB
+      let rawCardDetails = await DBHandler.Get({
+        tableName: "Cards",
+        db: database,
+        filterFields: [["ID", `${CardID}`]],
+      });
+
+      //Get Secondary Details
+      //Artist Name
+      let artistName = getArtist(rawCardDetails.Artist);
+
+      //Ability
+      let ability = rawCardDetails.AbilityID
+        ? getAbility(rawCardDetails.AbilityID)
+        : null;
+
+      //Name
+      let cardName = getName(rawCardDetails.NameLocalisationID);
+
+      //Flavour Text
+      let flavourText = rawCardDetails.FlavourLocalisationID
+        ? getFlavourText(rawCardDetails.FlavourLocalisationID)
+        : null;
+
+      //Description
+      let description = rawCardDetails.DescriptionLocalisationID
+        ? getDescription(rawCardDetails.DescriptionLocalisationID)
+        : null;
+
+      //Moves
+
+      console.log(rawCardDetails.HP);
+
+      //Structure data into type
+      let cardDetails: Card = {
+        Name: await cardName,
+        ID: rawCardDetails.ID,
+        Rarity: rawCardDetails.Rarity,
+        DisplayID: rawCardDetails.DisplayID,
+        IsFullArt: rawCardDetails.IsFullArt ? true : false,
+        Stage: rawCardDetails.Stage,
+        Type: rawCardDetails.Type,
+        IsEx: rawCardDetails.IsEx ? true : false,
+        Frame: rawCardDetails.Frame,
+        EvolvesFrom: rawCardDetails.EvolvesFrom,
+        Ability: await ability,
+        RetreatCost: rawCardDetails.RetreatCost,
+        Weakness: rawCardDetails.Weakness,
+        FlavorText: await flavourText,
+        DescriptionText: await description,
+        Moves: undefined,
+        Artist: await artistName,
+        HP: rawCardDetails.HP,
+      };
+
+      setCardDetails(cardDetails);
     }
 
-    dbRequest();
+    async function getArtist(artistID: number) {
+      return (
+        await DBHandler.Get({
+          tableName: "Illustrator",
+          db: database,
+          filterFields: [["ID", `${artistID}`]],
+        })
+      ).Name;
+    }
+
+    async function getName(nameID: number) {
+      return (
+        await DBHandler.Get({
+          tableName: "NamesLocalisation",
+          db: database,
+          filterFields: [["ID", `${nameID}`]],
+          queryFields: [LanguageCode],
+        })
+      )[LanguageCode];
+    }
+
+    async function getDescription(descriptionID: number) {
+      return (
+        (
+          await DBHandler.Get({
+            tableName: "DescriptionLocalisation",
+            db: database,
+            filterFields: [["ID", `${descriptionID}`]],
+            queryFields: [LanguageCode],
+          })
+        )[LanguageCode] as string
+      )
+        .replace(/\\\"/g, '"')
+        .replace(/\n/g, "");
+    }
+
+    async function getFlavourText(flavourTextID: number) {
+      return (
+        (
+          await DBHandler.Get({
+            tableName: "FlavourTextLocalisation",
+            db: database,
+            filterFields: [["ID", `${flavourTextID}`]],
+            queryFields: [LanguageCode],
+          })
+        )[LanguageCode] as string
+      ).replace(/\\n/g, "\n");
+    }
+
+    async function getAbility(abilityID: number) {
+      let rawDetails = await DBHandler.Get({
+        tableName: "Abilities",
+        db: database,
+        filterFields: [["ID", `${abilityID}`]],
+      });
+
+      let ability: Ability = {
+        AbilityName: (
+          await DBHandler.Get({
+            tableName: "AbilitiesNameLocalisation",
+            db: database,
+            filterFields: [["ID", `${rawDetails.Name}`]],
+            queryFields: [LanguageCode],
+          })
+        )[LanguageCode],
+        AbilityText: (
+          await DBHandler.Get({
+            tableName: "AbilitiesTextLocalisation",
+            db: database,
+            filterFields: [["ID", `${rawDetails.Text}`]],
+            queryFields: [LanguageCode],
+          })
+        )[LanguageCode],
+        AbilitySpecifics: rawDetails.SpecificsArray,
+      };
+
+      return ability;
+    }
+
+    getCardData();
   }, [CardID]);
 
   const RetreatDisplay = [];
