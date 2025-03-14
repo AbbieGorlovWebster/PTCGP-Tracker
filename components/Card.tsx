@@ -314,7 +314,11 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
       <ImageBackground /*Type Colour Background*/
         style={styles.card}
         source={
-          cardDetails ? CardAssets["Backgrounds"][cardDetails.Type] : null
+          cardDetails
+            ? CardAssets["Backgrounds"][
+                cardDetails?.Type as keyof (typeof CardAssets)["Backgrounds"]
+              ]
+            : null
         }
       >
         <ImageBackground /*Frame*/
@@ -323,7 +327,9 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
             cardDetails
               ? cardDetails.Rarity == 8
                 ? CardAssets["Frames"]["Gold"]
-                : CardAssets["Frames"][cardDetails.Frame]
+                : CardAssets["Frames"][
+                    cardDetails?.Frame as keyof (typeof CardAssets)["Frames"]
+                  ]
               : null
           }
         >
@@ -332,8 +338,13 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
             source={
               cardDetails
                 ? cardDetails.Rarity == 8
-                  ? CardAssets["Stage"]["Gold" + cardDetails.Stage]
-                  : CardAssets["Stage"][cardDetails.Stage]
+                  ? CardAssets["Stage"][
+                      ("Gold" +
+                        cardDetails?.Stage) as keyof (typeof CardAssets)["Stage"]
+                    ]
+                  : CardAssets["Stage"][
+                      cardDetails?.Stage as keyof (typeof CardAssets)["Stage"]
+                    ]
                 : null
             }
           >
@@ -341,7 +352,11 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
               style={styles.card}
               source={
                 cardDetails
-                  ? CardAssets["StageText"][LanguageCode][cardDetails.Stage]
+                  ? CardAssets["StageText"][
+                      LanguageCode as keyof (typeof CardAssets)["StageText"]
+                    ][
+                      cardDetails?.Stage as keyof (typeof CardAssets)["StageText"]["EN"]
+                    ]
                   : null
               }
             >
@@ -349,7 +364,9 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 style={[styles.typePip, styles.typeSymbol]}
                 source={
                   cardDetails
-                    ? CardAssets["TypeSymbols"][cardDetails.Type]
+                    ? CardAssets["TypeSymbols"][
+                        cardDetails?.Type as keyof (typeof CardAssets)["TypeSymbols"]
+                      ]
                     : null
                 }
               />
@@ -358,7 +375,9 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 style={styles.priorEvoloution}
                 source={
                   cardDetails && cardDetails.EvolvesFrom
-                    ? CardAssets["EvolvesFrom"][cardDetails.EvolvesFrom]
+                    ? CardAssets["EvolvesFrom"][
+                        cardDetails?.EvolvesFrom as keyof (typeof CardAssets)["EvolvesFrom"]
+                      ]
                     : null
                 }
               />
