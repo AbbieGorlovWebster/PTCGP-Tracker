@@ -11,17 +11,23 @@ type Card = {
   ID: number;
   Name: string;
   Rarity: number;
-  Count: number;
   DisplayID: string;
-  IsFullArt: number /*Treat as Bool*/;
+  IsFullArt: boolean;
   Type: string;
   Stage: number;
-  IsEx: number /*Treat as Bool*/;
+  IsEx: boolean;
   Frame: string;
   EvolvesFrom: string;
-  AbilityID: number;
+  Ability: Ability | null;
   RetreatCost: number;
-  NameLocalisationID: number;
+  Weakness: string;
+  FlavorText: string | null;
+  Moves: Move[] | undefined;
+  DescriptionText: string | null;
+  Artist: string;
+  HP: number;
+};
+
 };
 
 type Props = {
