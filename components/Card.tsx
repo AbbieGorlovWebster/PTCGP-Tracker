@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Image, type ImageSource } from "expo-image";
 import CardAssets from "../components/CardAssets";
 import * as DBHandler from "../components/DBHandler";
+import { Switch } from "react-native-gesture-handler";
 
 type Card = {
   ID: number;
@@ -414,6 +415,8 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                     )
                   : null}
               </Text>
+
+              {/* Retreat */}
               <View style={styles.retreatContainer}>
                 <Text
                   style={[
@@ -736,5 +739,3 @@ const styles = StyleSheet.create({
     height: 384,
   },
 });
-
-function localizeName(LocalizationID: number, LanguageCode: string) {}
