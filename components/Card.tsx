@@ -394,6 +394,24 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 }
               />
 
+              <Text
+                style={[
+                  styles.evoText,
+                  styles.SmallText,
+                  styles.regularText,
+                  styles.LeftAlign,
+                  styles.CenterVAlign,
+                ]}
+              >
+                {cardDetails?.EvolvesFrom
+                  ? CardAssets["Localisation"]["Evolves from"][
+                      LanguageCode as keyof (typeof CardAssets)["Localisation"]["Evolves from"]
+                    ].replace(
+                      "[Mst:CardCharacterName]",
+                      cardDetails?.EvolvesFrom
+                    )
+                  : null}
+              </Text>
               <View style={styles.retreatContainer}>
                 <Text
                   style={{
