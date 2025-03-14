@@ -429,6 +429,36 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 </Text>
                 {RetreatDisplay}
               </View>
+
+              {/* Name */}
+              <View style={styles.nameContainer}>
+                <Text
+                  style={[styles.cardText, styles.boldText, styles.HugeText]}
+                >
+                  {cardDetails?.Name}
+                </Text>
+              </View>
+
+              {/* Weakness */}
+              <View style={styles.weaknessContainer}>
+                <Text
+                  style={[
+                    styles.regularText,
+                    styles.NormalText,
+                    styles.CenterAlign,
+                    styles.CenterVAlign,
+                    styles.weaknessText,
+                  ]}
+                >
+                  {
+                    CardAssets["Localisation"]["Weakness"][
+                      LanguageCode as keyof (typeof CardAssets)["Localisation"]["Weakness"]
+                    ]
+                  }
+                </Text>
+                {WeaknessDisplay}
+              </View>
+
             </ImageBackground>
           </ImageBackground>
         </ImageBackground>
