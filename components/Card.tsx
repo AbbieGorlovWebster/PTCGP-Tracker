@@ -493,6 +493,34 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 </Text>
               </View>
 
+              {/* HP */}
+              <View style={styles.HPContainer}>
+                <Text
+                  style={[
+                    styles.LargeText,
+                    styles.boldText,
+                    styles.BottomAlign,
+                    { marginBottom: -8 },
+                  ]}
+                >
+                  {
+                    CardAssets["Localisation"]["HP"][
+                      LanguageCode as keyof (typeof CardAssets)["Localisation"]["HP"]
+                    ]
+                  }
+                </Text>
+                <Text
+                  style={[
+                    styles.boldText,
+                    styles.HugeText,
+                    styles.BottomAlign,
+                    { marginBottom: -15 },
+                  ]}
+                >
+                  {cardDetails?.HP}
+                </Text>
+              </View>
+
             </ImageBackground>
           </ImageBackground>
         </ImageBackground>
