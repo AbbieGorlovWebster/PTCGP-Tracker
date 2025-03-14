@@ -521,6 +521,23 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
                 </Text>
               </View>
 
+              {/* Description */}
+
+              <View style={styles.descriptionContainer}>
+                <Text
+                  style={[
+                    styles.NormalText,
+                    styles.CenterVAlign,
+                    styles.CenterAlign,
+                    styles.regularText,
+                  ]}
+                >
+                  {cardDetails?.DescriptionText}
+                </Text>
+              </View>
+
+              {/* Rarity */}
+              <View style={styles.rarityContainer}>{RarityDisplay}</View>
             </ImageBackground>
           </ImageBackground>
         </ImageBackground>
