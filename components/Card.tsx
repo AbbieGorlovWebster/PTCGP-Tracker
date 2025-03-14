@@ -235,6 +235,35 @@ export function CardRenderer({ CardID, ScaleFactor, LanguageCode }: Props) {
     }
   }
 
+  //Weakness
+  const WeaknessDisplay = [];
+
+  if (cardDetails?.Weakness) {
+    WeaknessDisplay.push(
+      <Image
+        style={[styles.typePip, styles.retreatSymbol]}
+        source={
+          CardAssets["TypeSymbols"][
+            cardDetails?.Weakness as keyof (typeof CardAssets)["TypeSymbols"]
+          ]
+        }
+      />
+    );
+    WeaknessDisplay.push(
+      <Text
+        style={[
+          styles.boldText,
+          styles.TopAlign,
+          styles.boldText,
+          styles.BigText,
+          { marginTop: -3 },
+        ]}
+      >
+        +20
+      </Text>
+    );
+  }
+
   return (
     <View style={{ transform: [{ scale: ScaleFactor }] }}>
       <ImageBackground /*Type Colour Background*/
